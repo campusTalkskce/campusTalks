@@ -1,5 +1,7 @@
 const signups=require('../model/signup')
 
+const Token=require("../utility/token")
+
 const signup=async(req,res)=>{
 
     try{
@@ -21,10 +23,11 @@ const login=async(req,res)=>
         const {email,pass}=req.body
         const s=await signups.findOne({email})
         if(!s)return res.json({msg:"user not found"})
-        if(pass!==s.pass)return res.js({msg:"invalid"})
-        res.json({msg:"success"})
+        if(pass!==s.pass)return res.json({msg:"invalid"})
+        const token=Token(s)
+        res.json({msg:"success",token})
     } catch (error) {
-        res.json({err:err.message})
+        res.json({msg:error.message})
         
     }
 }

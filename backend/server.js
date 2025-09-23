@@ -8,8 +8,9 @@ const app=express();
 dotenv.config();
 const port=process.env.port
 app.use(parser.json())
-app.use("/campustalk",route)
 
+app.use(cors({origin:"http://localhost:5173"}))
+app.use("/campustalk",route)
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("DB connected"))
 .catch((err)=>console.log(err))
