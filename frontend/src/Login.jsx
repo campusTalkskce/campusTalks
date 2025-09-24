@@ -31,6 +31,7 @@ const Login = () => {
           console.log(a.data.token);
           localStorage.setItem("tokenkey", a.data.token);
           alert("login success")
+          navigate('/technews')
         }
       } catch (error) {
         console.log(error);

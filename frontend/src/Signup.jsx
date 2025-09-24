@@ -49,7 +49,7 @@ export default function Signup() {
         email : <input type="email" onChange={(e)=>setEmail(e.target.value)} /><br /><br />
       password : <input type="password" onChange={(e)=>setPass(e.target.value)}/><br /><br />
       <button onClick={saveData}>Signup</button><br /><br />
-      <h2>{status} Already have an acount, Please LOGIN</h2><br /><br />
+      <h2>{status} </h2><br /><br />
       already have an account<Link to='/'> Login</Link>
       </form>
         
