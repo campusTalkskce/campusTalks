@@ -27,8 +27,9 @@ const Login = () => {
       else {
         setStatus("Login success");
         localStorage.setItem("tokenkey", data.token);
+        localStorage.setItem("email",email)
         alert("login success");
-        navigate("/home");
+        navigate("/element");
       }
     } catch (err) {
       console.error(err);

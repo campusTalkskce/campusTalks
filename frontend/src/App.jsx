@@ -7,6 +7,8 @@ import Navigation from './Navigation'
 import Technews from './Technews'
 import Events from './Events'
 import Home from './Home'
+import Homeelement from './Homeelement'
+import Profile from './Profile'
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/technews" element={<Technews />}></Route>
         <Route path="/events" element={<Events />}></Route>
+        <Route path="/element" element={<Homeelement />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         
         <Route path="/navi" element={<Navigation />}></Route>
 

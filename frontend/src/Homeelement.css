@@ -1,0 +1,73 @@
+img {
+  width: 300px;      /* Set desired width */
+  height: 200px;     /* Set desired height */
+  object-fit: cover; /* Keep aspect ratio and crop if needed */
+  border-radius: 8px; /* Optional rounded corners */
+}
+/* === Layout === */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f; /* dark background */
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.home-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* === Left Navigation === */
+.home-container > .left {
+  width: 260px; /* width of sidebar */
+  background-color: #4285f4; /* blue sidebar */
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+/* === Right Content === */
+.home-container > .right {
+  flex: 1;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow-y: auto;   /* Scroll if content is long */
+}
+
+/* === Each Post === */
+.post {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Uniform image size */
+.post img {
+  width: 100%;
+  max-width: 400px;   /* optional max width */
+  height: 250px;      /* fixed height */
+  object-fit: cover;  /* crop without distortion */
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Description text */
+.post h4 {
+  margin: 6px 0;
+  font-weight: normal;
+}
+
+/* Link styling */
+.post a {
+  color: #9b59b6; /* purple link */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.post a:hover {
+  text-decoration: underline;
+}
