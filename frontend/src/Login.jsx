@@ -1,59 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
-import Signup from "./Signup";
+import "./Login.css";           // ← add this
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [status, setStatus] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {}, [status]);
+
   const login = async (e) => {
     e.preventDefault();
-    if (email === "") alert("uname is empty");
-    else if (pass === "") alert("password is empty");
-    else {
-      const customer = { email: email, pass: pass };
-      try {
-        const a = await axios.post(
-          "http://localhost:5008/campustalk/login",
-          customer
-        );
-        console.log(a.data.msg);
-        if (a.data.msg === "user not found") setStatus("user not found");
-        else if (a.data.msg === "invalid") setStatus("invalid password");
-        else {
-          setStatus("Login success");
+    if (!email) return alert("Email is empty");
+    if (!pass) return alert("Password is empty");
 
-          console.log(a.data.token);
-          localStorage.setItem("tokenkey", a.data.token);
-          alert("login success")
-          navigate('/technews')
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5008/campustalk/login",
+        { email, pass }
+      );
+
+      if (data.msg === "user not found") setStatus("user not found");
+      else if (data.msg === "invalid") setStatus("invalid password");
+      else {
+        setStatus("Login success");
+        localStorage.setItem("tokenkey", data.token);
+        alert("login success");
+        navigate("/home");
       }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-     Email :
-      <input type="text" onChange={(e) => setEmail(e.target.value)} />
-      <br />
-      <br />
-      password :{" "}
-      <input type="password" onChange={(e) => setPass(e.target.value)} />
-      <br />
-      <br />
-      <button onClick={login}>Login</button>
-      <br />
-      <br />
-      <Link to="/Signup"> Signup</Link>
+    <div className="login-container">
+      <div className="login-image"></div>
+
+      <div className="login-form">
+        <h2>Login</h2>
+        <label>Email :</label>
+        <input
+          type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+        />
+        <label>Password :</label>
+        <input
+          type="password"
+          onChange={(e) => setPass(e.target.value)}
+          placeholder="Enter password"
+        />
+        <button onClick={login}>Login</button>
+        {status && <p className="status">{status}</p>}
+        <p>
+          No account? <Link to="/Signup">Signup</Link>
+        </p>
+      </div>
     </div>
   );
 };

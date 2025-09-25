@@ -7,3 +7,6 @@ const getdata =(user)=>
     
 }
 module.exports=getdata
+
+
+

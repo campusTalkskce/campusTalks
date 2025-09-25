@@ -1,0 +1,160 @@
+/* --- General Styles & Variables --- */
+:root {
+  --background-color: #121212; /* Dark background */
+  --card-color: #1e1e1e;       /* Slightly lighter card background */
+  --primary-text-color: #e0e0e0;/* Off-white for text */
+  --secondary-text-color: #a0a0a0;/* Lighter gray for secondary info */
+  --accent-color: #03a9f4;      /* A bright blue for links and highlights */
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+}
+
+/* --- Main Feed Container & Layout --- */
+.news-feed {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.news-feed h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+}
+
+.articles-grid {
+  display: grid;
+  /* Creates a responsive grid that makes columns between 350px and 1fr */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Individual Article Card --- */
+.article {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.article h2 {
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem 0;
+}
+
+/* --- Article Content (Links, Images, Text) --- */
+.article a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.article a:hover {
+  color: #4fc3f7; /* Lighter blue on hover */
+  text-decoration: underline;
+}
+
+.article img {
+  width: 100%;
+  height: 200px; /* Fixed height for a uniform look */
+  object-fit: cover; /* Prevents image distortion */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.article .article-source {
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  margin: 0 0 1rem 0;
+}
+
+.article p {
+  line-height: 1.6;
+  flex-grow: 1; /* Pushes the "Read more" link to the bottom */
+}
+
+.article .read-more {
+  font-weight: bold;
+  margin-top: 1rem; /* Ensures space above if description is short */
+  align-self: flex-start; /* Aligns the link to the left */
+}
+
+/* --- Loading and Error States --- */
+.status-message {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 4rem;
+  color: var(--secondary-text-color);
+}
+
+.status-message.error {
+  color: #ff5252; /* A clear error color */
+}
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+  .news-feed h1 {
+    font-size: 2rem;
+  }
+  
+  /* The grid will automatically become a single column due to minmax */
+  .news-feed {
+    padding: 1rem;
+  }
+}
+/* === Flex Layout for Sidebar + Content === */
+.layout {
+  display: flex;                 /* ✅ Horizontal layout */
+  align-items: flex-start;       /* Align items to top */
+  gap: 2rem;                      /* Space between nav and content */
+}
+
+/* Left Sidebar */
+.sidebar {
+  flex: 0 0 250px;                /* Fixed width (250px) */
+  background-color: var(--card-color);
+  padding: 1rem;
+  border-right: 1px solid var(--border-color);
+  border-radius: 8px;
+  height: 100%;                   /* Full height of the container */
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+/* Right Content Area */
+.content {
+  flex: 1;                        /* ✅ Takes remaining space */
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;       /* Stack on small screens */
+  }
+  .sidebar {
+    width: 100%;                  /* Full width on mobile */
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+  }
+}

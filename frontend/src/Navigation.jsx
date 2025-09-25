@@ -22,7 +22,7 @@ const drawerWidth = 240;
 export default function Navigation() {
 
 const menuItems = [
-  { text: "HOME", icon: <HomeIcon />, path: "/" },
+  { text: "HOME", icon: <HomeIcon />, path: "/home" },
   { text: "EVENTS", icon: <EventIcon />, path: "/events" },
   { text: "TECHNEWS", icon: <NewspaperIcon />, path: "/technews" },
   { text: "PROFILES", icon: <PersonIcon />, path: "/signup" },
