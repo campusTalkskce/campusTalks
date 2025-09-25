@@ -19,4 +19,3 @@ mongoose.connect(process.env.MONGO_URL)
 app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 
 app.listen(port,()=>console.log("server start at port :"+port))
-

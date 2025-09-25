@@ -35,9 +35,9 @@ const login=async(req,res)=>
 const savepost =async(req,res)=>
 {
     try{
-        const {image,description,link}=req.body
+        const {description,link}=req.body
         const imageurl=`/uploads/${req.file.filename}`
-        const result=await post.create({imageurl,description,link})
+        const result=await post.create({image:imageurl,description,link})
         res.json({msg:"success",post:result})
     }
     catch(err)
@@ -50,4 +50,15 @@ const getpost =async(req,res)=>
     const result=await post.find()
     res.json({msg:"success",post:result})
 }
-module.exports={signup,login,savepost,getpost}
+
+const check=async(req,res)=>
+{
+    const email=req.params.email;
+    const a=await signups.findOne({email})
+    if(!a)res.json({msg:"not found"})
+    else{
+res.json({msg:"success",uname:a.uname})}
+    
+
+}
+module.exports={signup,login,savepost,getpost,check}
