@@ -53,7 +53,7 @@ const getpost =async(req,res)=>
 }
 
 //get all events
-//http://localhost:5008/getevents
+//http://localhost:5008/campustalks/getevents
 const getevents=async(req,res)=>{
     try{
         const events=await Event.find()
