@@ -8,5 +8,4 @@ const signupschema=mongoose.Schema({
 })
 
 const signup=mongoose.model("signup",signupschema)
-//tbtbt
 module.exports=signup
