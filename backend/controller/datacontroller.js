@@ -1,6 +1,7 @@
 const signups=require('../model/signup')
 const post=require('../model/postupload')
 const Token=require("../utility/token")
+const Event=require("../model/EventsModel")
 
 const signup=async(req,res)=>{
 
@@ -35,9 +36,9 @@ const login=async(req,res)=>
 const savepost =async(req,res)=>
 {
     try{
-        const {description,link}=req.body
+        const {email,description,link}=req.body
         const imageurl=`/uploads/${req.file.filename}`
-        const result=await post.create({image:imageurl,description,link})
+        const result=await post.create({image:imageurl,email,description,link})
         res.json({msg:"success",post:result})
     }
     catch(err)
@@ -51,14 +52,30 @@ const getpost =async(req,res)=>
     res.json({msg:"success",post:result})
 }
 
-const check=async(req,res)=>
-{
-    const email=req.params.email;
-    const a=await signups.findOne({email})
-    if(!a)res.json({msg:"not found"})
-    else{
-res.json({msg:"success",uname:a.uname})}
-    
-
+//get all events
+//http://localhost:5008/campustalks/getevents
+const getevents=async(req,res)=>{
+    try{
+        const events=await Event.find()
+        res.json(events)        
+    }
+    catch(err)
+    {
+        console.log({err:err.message})
+    }
 }
-module.exports={signup,login,savepost,getpost,check}
+
+//post events
+//http://localhost:5008/campustalks/postevents
+    const postevents=async(req,res)=>{
+        try{
+            const{Title,Description,Url,Start,End}=req.body
+            const result=await Event.create({Title,Description,Url,Start,End})
+            res.json({msg:"success"})
+        }
+        catch(err)
+        {
+            console.log({err:err.message})
+        }
+    }
+module.exports={signup,login,savepost,getpost,getevents,postevents}

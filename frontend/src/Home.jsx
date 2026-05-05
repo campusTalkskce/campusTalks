@@ -1,9 +1,11 @@
 import React, { Children, useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import axios from "axios";
+import './Home.css';
 
 export default function Home() {
   const [image, setImage] = useState("");
+  const [email,setEmail] =useState("");
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const [status,setStatus]=useState("")
@@ -15,6 +17,7 @@ export default function Home() {
 
     const save = new FormData();
     save.append("image", image);
+    save.append("email",email);
     save.append("description", description);
     save.append("link", link);
     const result=await axios.post("http://localhost:5008/campustalk/savedata",save)
@@ -31,31 +34,43 @@ export default function Home() {
     }
   };
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-      <div>
-        <Navigation />
+   <div className="home-container">
+  <Navigation />
+
+  <div className="home-content">
+    <div className="form-box">
+      <h2>Upload Event</h2>
+
+      <div className="form-group">
+        <label>Upload Image</label>
+        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
       </div>
-      <div>
-        upload image :
-        <input
-          type="file"
-          placeholder="Upload image"
-          onChange={(e) => setImage(e.target.files[0])}
-        /><br /><br />
-        Description :{" "}
+
+      <div className="form-group">
+        <label>Description</label>
         <input
           type="text"
-          placeholder="Enter Description of the event"
+          placeholder="Enter description"
           onChange={(e) => setDescription(e.target.value)}
-        /><br /><br />
-        Link :{" "}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Link</label>
         <input
           type="text"
-          placeholder="Enter Link to regester for the event"
+          placeholder="Enter event link"
           onChange={(e) => setLink(e.target.value)}
-        /><br /><br />
-        <button onClick={saveimage}>POST</button><br /><br />
+        />
       </div>
+
+      <button className="submit-btn" onClick={saveimage}>
+        POST
+      </button>
+
+      {status && <p className="status-text">{status}</p>}
     </div>
+  </div>
+</div>
   );
 }

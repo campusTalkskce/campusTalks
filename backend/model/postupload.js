@@ -3,6 +3,7 @@ const mongoose=require('mongoose')
 const uploadSchma=mongoose.Schema({
 
     image:String,
+    email:String,
     description :String,
      link:String
 })
